@@ -4,6 +4,7 @@ import { QueryProvider } from './providers/query-client';
 import { RouterProvider_ } from './providers/router';
 import { seedDatabase } from '../shared/mocks/data/initialData';
 import { worker } from '../shared/mocks/browser';
+import '../index.css';
 
 const enableMocking = async () => {
   await worker.start({
