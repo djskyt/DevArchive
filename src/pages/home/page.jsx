@@ -1,6 +1,4 @@
-export const HomePage = () => {
-  return <div>Home</div>;
-};import { useSearch } from '../../features/search/model/useSearch';
+import { useSearch } from '../../features/search/model/useSearch';
 import { SearchBar } from '../../features/search/ui/SearchBar';
 import { ArticleCard } from '../../features/article/ui/ArticleCard';
 

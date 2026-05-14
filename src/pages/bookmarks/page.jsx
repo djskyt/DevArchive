@@ -1,12 +1,10 @@
-import { useParams } from 'react-router-dom';
-import { ArticleDetail } from '../../features/article/ui/ArticleDetail';
+import { BookmarkList } from '../../features/bookmark/ui/BookmarkList';
 
-export const ArticlePage = () => {
-  const { id } = useParams();
-
+export const BookmarksPage = () => {
   return (
     <div>
-      <ArticleDetail id={id} />
+      <h1>북마크</h1>
+      <BookmarkList />
     </div>
   );
 };
