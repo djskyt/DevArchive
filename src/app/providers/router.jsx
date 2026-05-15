@@ -4,6 +4,7 @@ import { HomePage } from '../../pages/home/page';
 import { BookmarksPage } from '../../pages/bookmarks/page';
 import { ArticlePage } from '../../pages/article/page';
 import { LoginPage } from '../../pages/login/page';
+import { ProtectedRoute } from '../../shared/ui/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -11,8 +12,14 @@ const router = createBrowserRouter([
     path: '/',
   },
   {
-    element: <Layout><BookmarksPage /></Layout>,
     path: '/bookmarks',
+    element: (
+      <Layout>
+        <ProtectedRoute>
+          <BookmarksPage />
+        </ProtectedRoute>
+      </Layout>
+    ),
   },
   {
     element: <Layout><ArticlePage /></Layout>,
