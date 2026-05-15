@@ -2,11 +2,10 @@ import { http, HttpResponse } from 'msw';
 import { db } from '../db';
 
 export const articleHandlers = [
-  // 전체 목록 + 검색
   http.get('/api/articles', ({ request }) => {
     const url = new URL(request.url);
     const q = url.searchParams.get('q')?.toLowerCase() ?? '';
-    const tag = url.searchParams.get('tag') ?? '';
+    const tags = url.searchParams.getAll('tags');
 
     let articles = db.articles.findAll();
 
@@ -18,14 +17,15 @@ export const articleHandlers = [
       );
     }
 
-    if (tag) {
-      articles = articles.filter((a) => a.tags.includes(tag));
+    if (tags.length > 0) {
+      articles = articles.filter((a) =>
+        tags.every((tag) => a.tags.includes(tag))
+      );
     }
 
     return HttpResponse.json(articles);
   }),
 
-  // 단건 조회
   http.get('/api/articles/:id', ({ params }) => {
     const article = db.articles.findById(params.id);
 
