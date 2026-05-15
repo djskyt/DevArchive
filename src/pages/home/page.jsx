@@ -1,10 +1,13 @@
 import { useSearch } from '../../features/search/model/useSearch';
 import { ArticleCard } from '../../features/article/ui/ArticleCard';
 
-const ALL_TAGS = ['React', 'JavaScript', 'Frontend', 'Architecture', 'TanStack Query', 'Zustand', 'MSW', 'Testing', 'State Management'];
+const ALL_TAGS = [
+  'React', 'JavaScript', 'Frontend', 'Architecture',
+  'TanStack Query', 'Zustand', 'MSW', 'Testing', 'State Management',
+];
 
 export const HomePage = () => {
-  const { query, setQuery, tag, setTag, articles, isPending, isError } = useSearch();
+  const { query, setQuery, tags, toggleTag, clearTags, articles, isPending, isError } = useSearch();
 
   return (
     <div className="flex flex-col gap-6">
@@ -25,9 +28,9 @@ export const HomePage = () => {
 
       <div className="flex flex-wrap gap-2">
         <button
-          onClick={() => setTag('')}
+          onClick={clearTags}
           className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-            tag === ''
+            tags.length === 0
               ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 border-transparent'
               : 'border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-500'
           }`}
@@ -37,9 +40,9 @@ export const HomePage = () => {
         {ALL_TAGS.map((t) => (
           <button
             key={t}
-            onClick={() => setTag(t === tag ? '' : t)}
+            onClick={() => toggleTag(t)}
             className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-              tag === t
+              tags.includes(t)
                 ? 'bg-indigo-500 text-white border-transparent'
                 : 'border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-500'
             }`}
