@@ -1,10 +1,6 @@
 import { useSearch } from '../../features/search/model/useSearch';
 import { ArticleCard } from '../../features/article/ui/ArticleCard';
-
-const ALL_TAGS = [
-  'React', 'JavaScript', 'Frontend', 'Architecture',
-  'TanStack Query', 'Zustand', 'MSW', 'Testing', 'State Management',
-];
+import { ARTICLE_TAGS } from '../../shared/utils/constants';
 
 export const HomePage = () => {
   const { query, setQuery, tags, toggleTag, clearTags, articles, isPending, isError } = useSearch();
@@ -37,7 +33,7 @@ export const HomePage = () => {
         >
           전체
         </button>
-        {ALL_TAGS.map((t) => (
+        {ARTICLE_TAGS.map((t) => (
           <button
             key={t}
             onClick={() => toggleTag(t)}
