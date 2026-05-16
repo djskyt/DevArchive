@@ -1,17 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { bookmarkApi } from '../../../entities/bookmark/api/bookmark.api';
 import { queryKeys } from '../../../shared/api/queryKeys';
 import { useAuthStore } from '../../../shared/store/auth.store';
+import { useBookmarks } from './useBookmarks';
 
 export const useBookmarkToggle = (articleId) => {
   const user = useAuthStore((state) => state.user);
   const queryClient = useQueryClient();
-
-  const { data: bookmarks = [] } = useQuery({
-    queryKey: queryKeys.bookmarks.list(user?.id),
-    queryFn: () => bookmarkApi.getByUserId(user.id),
-    enabled: !!user,
-  });
+  const { data: bookmarks = [] } = useBookmarks();
 
   const isBookmarked = bookmarks.some((b) => b.articleId === articleId);
 
